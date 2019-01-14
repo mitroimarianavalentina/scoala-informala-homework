@@ -5,64 +5,64 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-//
-//        /** 1. Calculate the sum of the first 100 numbers higher than 0. */
-//        System.out.println(" The sum of the first 100 numbers higher than 0 is: " + sum());
-//
-//
-//        /** 2. Display the smallest number from a collection of numbers. */
-//        System.out.println("Enter the length of the collection:");
-//        int length = scanner.nextInt();
-//        System.out.println("The smallest number from the collection is: " + min(length));
-//
-//
-//        /** 3. Display the max digit from a number. Read the number from keyboard. */
-//        System.out.println("Enter the number: ");
-//        int n = scanner.nextInt();
-//        System.out.println("Max digit of the number " + n + " is: " + digit(n));
-//
-//
-//        /**  4.Check if a number is a palindrome (e.g. 1221, 34143). */
-//        System.out.print("Enter the number you want to check: ");
-//        int number = scanner.nextInt();
-//        if (palindrome(number)){
-//            System.out.println("The number is palindrome");
-//        }else{
-//            System.out.println("The number is  NOT palindrome");
-//        }
-//
-//        /** 5. Display all the prime numbers lower than a given number. */
-//        System.out.print("Enter the ending stop of the prime numbers: ");
-//        int x = scanner.nextInt();
-//        displayAllPrimeNumbers(x);
-//
-//        /** 6. Input the dimensions of a rectangle and display area and perimeter. */
-//        System.out.print("Enter the width of the rectangle: ");
-//        int w = scanner.nextInt();
-//        System.out.print("Enter the height of the rectangle: ");
-//        int h = scanner.nextInt();
-//        System.out.println("The area of the rectangle is: " + area(w, h));
-//        System.out.print("The perimeter of the rectangle is: " + perimeter(w, h));
 
-//        /** 7. Input the length of the side of a square, and display its area.  Produce an error message if the length is negative. */
-//        System.out.print("Enter the side of the square: ");
-//        int squareSide = scanner.nextInt();
-//        if (squareSide > 0) {
-//            System.out.println("The area of teh square is: " + squareArea(squareSide));
-//        }else if (squareSide == 0){
-//            System.out.println("Error! The side can not be zero!");
-//        }else{
-//            System.out.println("Error! You introduced a negative side!");
-//        }
+        /** 1. Calculate the sum of the first 100 numbers higher than 0. */
+        System.out.println(" The sum of the first 100 numbers higher than 0 is: " + sum());
 
-//        /** 8. Input 3 numbers, and display the biggest. */
-//        System.out.print("Enter the first number: ");
-//        int first = scanner.nextInt();
-//        System.out.print("Enter the second number: ");
-//        int second = scanner.nextInt();
-//        System.out.print("Enter the third number: ");
-//        int third = scanner.nextInt();
-//        System.out.print(biggestNumber (first, second, third));
+
+        /** 2. Display the smallest number from a collection of numbers. */
+        System.out.println("Enter the length of the collection:");
+        int length = scanner.nextInt();
+        System.out.println("The smallest number from the collection is: " + min(length));
+
+
+        /** 3. Display the max digit from a number. Read the number from keyboard. */
+        System.out.println("Enter the number: ");
+        int n = scanner.nextInt();
+        System.out.println("Max digit of the number " + n + " is: " + digit(n));
+
+
+        /**  4.Check if a number is a palindrome (e.g. 1221, 34143). */
+        System.out.print("Enter the number you want to check: ");
+        int number = scanner.nextInt();
+        if (palindrome(number)){
+            System.out.println("The number is palindrome");
+        }else{
+            System.out.println("The number is  NOT palindrome");
+        }
+
+        /** 5. Display all the prime numbers lower than a given number. */
+        System.out.print("Enter the ending stop of the prime numbers: ");
+        int x = scanner.nextInt();
+        displayAllPrimeNumbers(x);
+
+        /** 6. Input the dimensions of a rectangle and display area and perimeter. */
+        System.out.print("Enter the width of the rectangle: ");
+        int w = scanner.nextInt();
+        System.out.print("Enter the height of the rectangle: ");
+        int h = scanner.nextInt();
+        System.out.println("The area of the rectangle is: " + area(w, h));
+        System.out.print("The perimeter of the rectangle is: " + perimeter(w, h));
+
+        /** 7. Input the length of the side of a square, and display its area.  Produce an error message if the length is negative. */
+        System.out.print("Enter the side of the square: ");
+        int squareSide = scanner.nextInt();
+        if (squareSide > 0) {
+            System.out.println("The area of teh square is: " + squareArea(squareSide));
+        }else if (squareSide == 0){
+            System.out.println("Error! The side can not be zero!");
+        }else{
+            System.out.println("Error! You introduced a negative side!");
+        }
+
+        /** 8. Input 3 numbers, and display the biggest. */
+        System.out.print("Enter the first number: ");
+        int first = scanner.nextInt();
+        System.out.print("Enter the second number: ");
+        int second = scanner.nextInt();
+        System.out.print("Enter the third number: ");
+        int third = scanner.nextInt();
+        System.out.print(biggestNumber (first, second, third));
 
 
         /** 9. Input 2 values: start and finish, then display the numbers from start to finish. */
