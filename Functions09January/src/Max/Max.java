@@ -9,7 +9,7 @@
  */
 
 
-package Exercise1;
+package Max;
 
 import java.util.Scanner;
 
