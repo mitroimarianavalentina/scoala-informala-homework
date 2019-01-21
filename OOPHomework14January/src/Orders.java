@@ -22,4 +22,5 @@ public class Orders {
     public int getQuantity() {
         return quantity;
     }
+
 }

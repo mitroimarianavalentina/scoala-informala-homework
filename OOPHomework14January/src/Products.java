@@ -17,19 +17,20 @@ public class Products {
     private float price;
     private String validityDate;
     private int weight; // it will be in grams
-    private int id = 0;
+    private int id;
     private int stock;
 
-    public Products(String productName, float price, String validityDate, int weight, int stock) {
+    public Products(String productName, float price, String validityDate, int weight, int id, int stock) {
         this.productName = productName;
         this.price = price;
         this.validityDate = validityDate;
         this.weight = weight;
-        id++;
+        this.id = id;
         this.stock = stock;
     }
 
-    public String getProductName() {
+
+    String getProductName() {
         return productName;
     }
 

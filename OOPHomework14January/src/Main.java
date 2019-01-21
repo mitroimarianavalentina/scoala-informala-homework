@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * A farm sells animal and vegetable products at the local store.
  * All products have on their packaging the price, validity date and weight.
@@ -66,19 +68,167 @@
 
 
 public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+    private static Store store = new Store();
+
     public static void main(String[] args) {
-
-        Store store = new Store();
-        displayPrincipalMenu();
-
+        chooseOption();
     }
 
-    private static void displayPrincipalMenu(){
+    /**
+     * method to display the main menu
+     */
+    private static void displayMainMenu(){
         System.out.println("Choose an option:\n" +
-                "-----------------------------------------" +
+                "-----------------------------------------\n" +
                 "1. Create product and add it to stock.\n" +
                 "2. Sell product.\n" +
                 "3. Display daily sales.\n" +
                 "4. Exit.");
+    }
+
+    /**
+     * method to display the derived menu
+     */
+    private static void displayDerivedMenu(){
+        System.out.println("Product type:\n" +
+                "1. Animal.\n" +
+                "2. Vegetable.\n");
+    }
+
+    /**
+     * method to choose from options
+     */
+    private static void chooseOption(){
+        boolean variable = true;
+        while(variable) {
+            displayMainMenu();
+            int option = scanner.nextInt();
+            scanner.nextLine();
+            switch (option) {
+                case 1:
+                    displayDerivedMenu();
+                    chooseDerivedOptions();
+                    break;
+                case 2:
+                    sellProduct();
+                    break;
+                case 3:
+                    displayDailySales();
+                    break;
+                case 4:
+                    variable = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice! Choose again!");
+                    break;
+            }
+        }
+    }
+
+    /**
+     * method to make the user add all the details of a animal product, and add the product to the store
+     */
+    private static void createAnimalProduct(){
+        System.out.println("Please enter the product specifications:\nProduct Name: ");
+        scanner.nextLine();
+        String name = scanner.nextLine();
+        System.out.println("Product ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Product Price: ");
+        int price = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Validity Date (yy-mm-dd): ");
+        String validityDate = scanner.nextLine();
+        System.out.println("Product Weight (grams): ");
+        int weight = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Quantity: ");
+        int quantity = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Temperature to preserve it to: (Celcius)" );
+        int temperature = scanner.nextInt();
+        scanner.nextLine();
+        store.createAnimalProduct(name, price, validityDate, weight, quantity, temperature, id);
+    }
+
+    /**
+     * method to make the user add all the details of a vegetal product, and add the product to the store
+     */
+    private static void createVegetalProduct(){
+        System.out.println("Please enter the product specifications:\nProduct Name: ");
+        scanner.nextLine();
+        String name = scanner.nextLine();
+        System.out.println("Product ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Product Price: ");
+        int price = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Validity Date (yy-mm-dd): ");
+        String validityDate = scanner.nextLine();
+        System.out.println("Product Weight (grams): ");
+        int weight = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Quantity: ");
+        int quantity = scanner.nextInt();
+        scanner.nextLine();
+        store.createVegetalProduct(name, price, validityDate, weight, quantity,id, store.addVitamins());
+    }
+
+    /**
+     * method to make the user take action about the kind of product he wants to add : animal product or vegetal product
+     */
+    private static void chooseDerivedOptions(){
+        boolean variable = true;
+        while(variable) {
+            int derivedOption = scanner.nextInt();
+            switch (derivedOption) {
+                case 1:
+                    createAnimalProduct();
+                    variable = false;
+                    break;
+                case 2:
+                    createVegetalProduct();
+                    variable = false;
+                    break;
+                    default:
+                        System.out.println("Invalid choice! Choose again!");
+                        displayDerivedMenu();
+                        break;
+            }
+        }
+    }
+
+    /**
+     * method to sell a product based on the id and quantity given by the user
+     */
+    private static void sellProduct(){
+        store.displayAnimalProducts();
+        store.displayVegetalProducts();
+        System.out.println("What product you want to sell?\nType the id: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Type the quantity: ");
+        int quantity = scanner.nextInt();
+        scanner.nextLine();
+        if (!store.sellAnimalProduct(id, quantity) && !store.sellVegetalProduct(id, quantity)){
+            System.out.println("The product you are looking for, does not exist!");
+        }
+    }
+
+    /**
+     * method to display all the orders from a specific date chosen by the user
+     */
+    private static void displayDailySales(){
+        if (store.ordersPlaced()){
+            System.out.println("Give the date you want to see the sales from.(yy-mm-dd)");
+            String date = scanner.nextLine();
+            store.displayOrders(date);
+        }else{
+            System.out.println("No orders places do far!");        }
+
     }
 }

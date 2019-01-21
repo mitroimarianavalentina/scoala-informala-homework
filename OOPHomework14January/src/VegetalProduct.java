@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * * A farm sells animal and vegetable products at the local store.
@@ -13,16 +16,21 @@
  *  * A product is identified uniquely by an ID.
  */
 
+public class VegetalProduct extends  Products{
 
-public class AnimalProducts extends Products{
-    private int temperature;
+    private ArrayList<String> vitamins;
 
-    public AnimalProducts(String productName, float price, String validityDate, int weight, int stock, int temperature) {
-        super(productName, price, validityDate, weight, stock);
-        this.temperature = temperature;
+
+    public VegetalProduct(String productName, float price, String validityDate, int weight, int id, int stock,
+                          ArrayList<String> vitamins) {
+        super(productName, price, validityDate, weight, id, stock);
+        this.vitamins = new ArrayList<>();
+        for (String s : vitamins){
+            this.vitamins.add(s);
+        }
     }
 
-    public int getTemperature() {
-        return temperature;
+    public ArrayList<String> getVitamins() {
+        return vitamins;
     }
 }
