@@ -13,7 +13,7 @@ public class Store {
     private ArrayList<VegetalProduct> arrayVegetalProduct;
     private static final Pattern LETTERS = Pattern.compile("\\p{Alpha}+");
 
-    private ArrayList<Orders> arrayOrders;
+    private ArrayList<Order> arrayOrders;
 
     /**
      * constructor of the class
@@ -74,6 +74,7 @@ public class Store {
         }
     }
 
+
     /**
      * method to sell a product
      *
@@ -86,7 +87,7 @@ public class Store {
             // if in the array of animal products exists a product with this id, and we have the appropriate quantity
             if ((animalProduct.getId() == id) && (animalProduct.getStock() >= quantity)) {
                 // the product will be added in an array of orders
-                arrayOrders.add(new Orders(localDate(), id, quantity));
+                arrayOrders.add(new Order(localDate(), id, quantity));
                 // set the new stock of the product after selling
                 animalProduct.setStock(animalProduct.getStock() - quantity);
                 found = true;
@@ -111,7 +112,7 @@ public class Store {
             // if in the array of animal products exists a product with this id, and we have the appropriate quantity
             if ((vegetalProduct.getId() == id) && (vegetalProduct.getStock() >= quantity)) {
                 // the product will be added in an array of orders
-                arrayOrders.add(new Orders(localDate(), id, quantity));
+                arrayOrders.add(new Order(localDate(), id, quantity));
                 // set the new stock of the product after selling
                 vegetalProduct.setStock(vegetalProduct.getStock() - quantity);
                 found = true;
@@ -130,13 +131,37 @@ public class Store {
      * @param id - the id we want to check
      * @return true - if the id is already given to another product; and false - otherwise
      */
-    private boolean duplicateID(int id) {
+    private boolean duplicateAnimalID(int id) {
         for (AnimalProduct animalProduct : arrayAnimalProduct) {
             if (animalProduct.getId() == id) {
                 return false;
             }
         }
         return true;
+    }
+    /**
+     * method to avoid registering a duplicate id
+     *
+     * @param id - the id we want to check
+     * @return true - if the id is already given to another product; and false - otherwise
+     */
+    private boolean duplicateVegetlID(int id) {
+        for (VegetalProduct vegetalProduct : arrayVegetalProduct) {
+            if (vegetalProduct.getId() == id) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * method to avoid registering a duplicate id
+     *
+     * @param id - the id we want to check
+     * @return true - if the id is already given to another product; and false - otherwise
+     */
+    private boolean duplicateID(int id) {
+        return duplicateAnimalID(id)&& duplicateVegetlID(id);
     }
 
     /**
@@ -166,18 +191,17 @@ public class Store {
      * method to display the orders from a specific date
      */
     public void displayOrders(String date) {
-        System.out.println("Orders placed on " + date + ":\n");
+        System.out.println("Order placed on " + date + ":\n");
         System.out.println("ID\tQuantity\n----------------------");
-        for (Orders orders : arrayOrders) {
-            if (orders.getDate().toString().equals(date)) {
+        for (Order order : arrayOrders) {
+            if (order.getDate().toString().equals(date)) {
                 System.out.println(
-                        orders.getId() + "\t" +
-                                orders.getQuantity());
+                        order.getId() + "\t" +
+                                order.getQuantity());
             }
         }
     }
 
-// TODO sa adaug cantitate noua pt acelasi produs
 
     /**
      * method to get the local date
@@ -233,6 +257,12 @@ public class Store {
         }
         return false;
     }
+
+
+    public void updateStock(){
+
+    }
+
 
     /**
      * method to update the product stock

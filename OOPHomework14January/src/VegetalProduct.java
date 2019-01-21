@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /**
  * * A farm sells animal and vegetable products at the local store.
@@ -16,7 +14,7 @@ import java.util.regex.Pattern;
  *  * A product is identified uniquely by an ID.
  */
 
-public class VegetalProduct extends  Products{
+public class VegetalProduct extends Product {
 
     private ArrayList<String> vitamins;
 

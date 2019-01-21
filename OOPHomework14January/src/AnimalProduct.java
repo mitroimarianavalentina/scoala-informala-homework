@@ -1,5 +1,5 @@
 
-public class AnimalProduct extends Products{
+public class AnimalProduct extends Product {
     private int temperature;
 
     public AnimalProduct(String productName, float price, String validityDate, int weight, int stock, int temperature,
