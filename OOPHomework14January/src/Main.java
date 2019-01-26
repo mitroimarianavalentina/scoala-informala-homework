@@ -206,15 +206,14 @@ public class Main {
      * method to sell a product based on the id and quantity given by the user
      */
     private static void sellProduct(){
-        store.displayAnimalProducts();
-        store.displayVegetalProducts();
+        store.displayProducts();
         System.out.println("What product you want to sell?\nType the id: ");
         int id = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Type the quantity: ");
         int quantity = scanner.nextInt();
         scanner.nextLine();
-        if (!store.sellAnimalProduct(id, quantity) && !store.sellVegetalProduct(id, quantity)){
+        if (!store.sellProduct(id, quantity)){
             System.out.println("The product you are looking for, does not exist!");
         }
     }

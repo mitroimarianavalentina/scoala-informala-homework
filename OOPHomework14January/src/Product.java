@@ -21,18 +21,6 @@ public class Product {
         return productName;
     }
 
-    public float getPrice() {
-        return price;
-    }
-
-    public String getValidityDate() {
-        return validityDate;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
     public int getId() {
         return id;
     }
