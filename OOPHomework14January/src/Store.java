@@ -1,16 +1,13 @@
+
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 
 public class Store {
     //member to hold the list of AnimalProduct
-    private ArrayList<AnimalProduct> arrayAnimalProduct;
-    //member to hold the list of AnimalProduct
-    private ArrayList<VegetalProduct> arrayVegetalProduct;
+    private ArrayList<Product> arrayProduct;
     private static final Pattern LETTERS = Pattern.compile("\\p{Alpha}+");
 
     private ArrayList<Order> arrayOrders;
@@ -19,8 +16,7 @@ public class Store {
      * constructor of the class
      */
     public Store() {
-        arrayAnimalProduct = new ArrayList<>();
-        arrayVegetalProduct = new ArrayList<>();
+        arrayProduct = new ArrayList<>();
         arrayOrders = new ArrayList<>();
     }
 
@@ -36,11 +32,11 @@ public class Store {
      * @param id           - the id of the product
      */
     public void createAnimalProduct(String productName, float price, String validityDate,
-                             int weight, int stock, int temperature, int id) {
+                                    int weight, int stock, int temperature, int id) {
         // check the ID, we don't want to add duplicates
         if (duplicateID(id)) {
             //create a new AnimalProduct
-            arrayAnimalProduct.add(new AnimalProduct(productName, price, validityDate, weight, stock, temperature, id));
+            arrayProduct.add(new AnimalProduct(productName, price, validityDate, weight, stock, temperature, id));
         } else {
             System.out.println("The product " + productName +
                     " was not added to the Store!!!");
@@ -61,11 +57,11 @@ public class Store {
      * @param id           - the id of the product
      */
     public void createVegetalProduct(String productName, float price, String validityDate,
-                              int weight, int stock, int id, ArrayList<String> vitamins) {
+                                     int weight, int stock, int id, ArrayList<String> vitamins) {
         // check the ID, we don't want to add duplicates
         if (duplicateID(id)) {
             //create a new AnimalProduct
-            arrayVegetalProduct.add(new VegetalProduct(productName, price, validityDate, weight, stock, id, vitamins));
+            arrayProduct.add(new VegetalProduct(productName, price, validityDate, weight, id, stock,  vitamins));
         } else {
             System.out.println("The product " + productName +
                     " was not added to the Store!!!");
@@ -81,77 +77,25 @@ public class Store {
      * @param id       - product's id that will be sold
      * @param quantity - the quantity we want to sell
      */
-    public boolean sellAnimalProduct(int id, int quantity) {
+    public boolean sellProduct(int id, int quantity) {
         boolean found = false;
-        for (AnimalProduct animalProduct : arrayAnimalProduct) {
+        for (Product product : arrayProduct) {
             // if in the array of animal products exists a product with this id, and we have the appropriate quantity
-            if ((animalProduct.getId() == id) && (animalProduct.getStock() >= quantity)) {
-                // the product will be added in an array of orders
-                arrayOrders.add(new Order(localDate(), id, quantity));
-                // set the new stock of the product after selling
-                animalProduct.setStock(animalProduct.getStock() - quantity);
-                found = true;
-            } else if ((animalProduct.getId() == id) && (animalProduct.getStock() < quantity)) {
-                // if the product exists, but there is no stock
-                System.out.println("Insufficient stock for the product!!!");
-                found = true;
+            if (product.getId() == id){
+                if (product.getStock() >= quantity) {
+                    // the product will be added in an array of orders
+                    arrayOrders.add(new Order(LocalDate.now(), id, quantity));
+                    // set the new stock of the product after selling
+                    product.setStock(product.getStock() - quantity);
+                    found = true;
+                }else {
+                    // if the product exists, but there is no stock
+                    System.out.println("Insufficient stock for the product " + product.getProductName() + "!!!");
+                    found = true;
+                }
             }
         }
         return found;
-    }
-
-    /**
-     * method to sell a vegetal product
-     *
-     * @param id       - product's id that will be sold
-     * @param quantity - the quantity we want to sell
-     */
-    public  boolean sellVegetalProduct(int id, int quantity) {
-        boolean found = false;
-        for (VegetalProduct vegetalProduct : arrayVegetalProduct) {
-            // if in the array of animal products exists a product with this id, and we have the appropriate quantity
-            if ((vegetalProduct.getId() == id) && (vegetalProduct.getStock() >= quantity)) {
-                // the product will be added in an array of orders
-                arrayOrders.add(new Order(localDate(), id, quantity));
-                // set the new stock of the product after selling
-                vegetalProduct.setStock(vegetalProduct.getStock() - quantity);
-                found = true;
-            } else if ((vegetalProduct.getId() == id) && (vegetalProduct.getStock() < quantity)) {
-                // if the product exists, but there is no stock
-                System.out.println("Insufficient stock for the product!!!");
-                found = true;
-            }
-        }
-        return found;
-    }
-
-    /**
-     * method to avoid registering a duplicate id
-     *
-     * @param id - the id we want to check
-     * @return true - if the id is already given to another product; and false - otherwise
-     */
-    private boolean duplicateAnimalID(int id) {
-        for (AnimalProduct animalProduct : arrayAnimalProduct) {
-            if (animalProduct.getId() == id) {
-                return false;
-            }
-        }
-        return true;
-    }
-    /**
-     * method to avoid registering a duplicate id
-     *
-     * @param id - the id we want to check
-     * @return true - if the id is already given to another product; and false - otherwise
-     */
-    private boolean duplicateVegetlID(int id) {
-        for (VegetalProduct vegetalProduct : arrayVegetalProduct) {
-            if (vegetalProduct.getId() == id) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -161,29 +105,23 @@ public class Store {
      * @return true - if the id is already given to another product; and false - otherwise
      */
     private boolean duplicateID(int id) {
-        return duplicateAnimalID(id)&& duplicateVegetlID(id);
+        for (Product product : arrayProduct) {
+            if (product.getId() == id) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
      * method to display all the animal products from the store
      */
-    public void displayAnimalProducts() {
+    public void displayProducts() {
         System.out.println("ID\tName\t\t\tQuantity\n------------------------------------");
-        for (AnimalProduct animalProduct : arrayAnimalProduct) {
-            System.out.println(animalProduct.getId() + "\t" +
-                    animalProduct.getProductName() + "\t\t" +
-                    animalProduct.getStock());
-        }
-    }
-
-    /**
-     * method to display all the vegetal products from the store
-     */
-    public void displayVegetalProducts() {
-        for (VegetalProduct vegetalProduct : arrayVegetalProduct) {
-            System.out.println(vegetalProduct.getId() + "\t" +
-                    vegetalProduct.getProductName() + "\t\t" +
-                    vegetalProduct.getStock());
+        for (Product product : arrayProduct) {
+            System.out.println(product.getId() + "\t" +
+                    product.getProductName() + "\t\t" +
+                    product.getStock());
         }
     }
 
@@ -200,15 +138,6 @@ public class Store {
                                 order.getQuantity());
             }
         }
-    }
-
-
-    /**
-     * method to get the local date
-     */
-    private LocalDate localDate() {
-        Date input = new Date();
-        return (input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
 
     /**
@@ -259,27 +188,6 @@ public class Store {
     }
 
 
-    public void updateStock(){
-
-    }
-
-
-    /**
-     * method to update the product stock
-     *
-     * @return true - if the user wants to update the product's stock, and false otherwise
-     */
-    private boolean addStock() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Do you want to update the stock? Press Y - Yes / N - No");
-        if (sc.nextLine().toUpperCase().equals("Y")) {
-            return true;
-        } else if (sc.nextLine().toUpperCase().equals("N")) {
-            return false;
-        }
-        return false;
-    }
-
     /**
      * method to check if the keyboard input is a String or not
      *
@@ -290,3 +198,4 @@ public class Store {
         return LETTERS.matcher(text).matches();
     }
 }
+
