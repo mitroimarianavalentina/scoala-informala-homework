@@ -31,7 +31,7 @@ public class Time {
      *
      * @return true if the hour and minutes are valid, or false otherwise
      */
-    private static  boolean verifyTime(int hour, int minutes){
+    public static  boolean verifyTime(int hour, int minutes){
         return  (hour >= 0 &&
                 hour <= 23 &&
                 minutes >=0 &&
