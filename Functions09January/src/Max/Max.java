@@ -28,7 +28,7 @@ public class Max {
      * @param b second number to compare
      * @return the biggest number
      */
-    private static int getMax(int a, int b) {
+    public static int getMax(int a, int b) {
         if (a >= b) {
             return a;
         } else {
