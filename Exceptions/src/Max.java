@@ -8,15 +8,11 @@
  * @author Maariana Valentina Mitroi
  */
 
-
-package Max;
-
 import java.util.Scanner;
 
 public class Max {
 
     private static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
         exerciseOne();
     }
@@ -28,11 +24,15 @@ public class Max {
      * @param b second number to compare
      * @return the biggest number
      */
-    public static int getMax(int a, int b) {
-        if (a >= b) {
-            return a;
-        } else {
-            return b;
+    public static String getMax(String a, String b) {
+        try{
+            if (Integer.parseInt(a) >= Integer.parseInt(b)) {
+                return a;
+            } else {
+                return b;
+            }
+        }catch (NumberFormatException	e) {
+            throw new IllegalArgumentException("Arguments should be numbers:	" + e.getMessage());
         }
     }
 
@@ -41,13 +41,18 @@ public class Max {
      */
     private static void exerciseOne() {
         System.out.print("Enter the first number: ");
-        int first = scanner.nextInt();
+        String first = scanner.nextLine();
         System.out.print("Enter the second number: ");
-        int second = scanner.nextInt();
+        String second = scanner.nextLine();
         System.out.print("Enter the third number: ");
-        int third = scanner.nextInt();
-
-        System.out.print("the biggest from " + first + ", " + second + ", " + third +
-                " is: " + getMax(getMax(getMax(first, second), getMax(first, third)), getMax(second, third)));
+        String third = scanner.nextLine();
+        try {
+            System.out.print("the biggest from " + first + ", " + second + ", " + third +
+                    " is: " + getMax(getMax(getMax(first, second), getMax(first, third)), getMax(second, third)));
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }catch (IllegalArgumentException e){
+            System.out.println("Invalid	arguments:	" + e.getMessage());
+        }
     }
 }
