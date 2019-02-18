@@ -50,6 +50,8 @@ public class Max {
             System.out.print("the biggest from " + first + ", " + second + ", " + third +
                     " is: " + getMax(getMax(getMax(first, second), getMax(first, third)), getMax(second, third)));
         } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }catch (IllegalArgumentException e){
             System.out.println("Invalid	arguments:	" + e.getMessage());
         }
     }

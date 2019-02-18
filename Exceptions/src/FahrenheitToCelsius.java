@@ -18,12 +18,7 @@ public class FahrenheitToCelsius {
     private static final float NORMAL_BODY_TEMPERATURE = 37.f;
 
     public static void main(String[] args) {
-        String fahrenheit = scanner.nextLine();
-        try	{
-            exerciseTwo(fahrenheit);
-        }catch(NumberFormatException	e)	{
-            System.out.println("Invalid	fahrenheit	argument:	" + e.getMessage());
-        }
+        exerciseTwo();
     }
 
     /**
@@ -32,21 +27,29 @@ public class FahrenheitToCelsius {
      * @param fahrenheit - the fahrenheit value given by the user
      * @return the value resulted after transforming the fahrenheit to celsius
      */
-    private static float fahrenheitToCelsius(float fahrenheit) {
-        return (fahrenheit - 32) * 5 / 9;
+    private static float fahrenheitToCelsius(String fahrenheit) {
+        try	{
+            return (Float.parseFloat(fahrenheit) - 32) * 5 / 9;
+        }catch (NumberFormatException	e) {
+            throw new IllegalArgumentException("Arguments should be numbers:" + e.getMessage());
+        }
     }
 
     /**
      * method to display the Celsius temperature using the fahrenheitToCelsius() method
      */
-    private static void exerciseTwo(String fahrenheit) throws IllegalArgumentException{
+    private static void exerciseTwo(){
         System.out.print("Enter the body temperature (in Fahrenheit): ");
+        String fahrenheit = scanner.nextLine();
         try{
-            if (fahrenheitToCelsius(Float.parseFloat(fahrenheit)) > NORMAL_BODY_TEMPERATURE) {
+            if (fahrenheitToCelsius(fahrenheit) > NORMAL_BODY_TEMPERATURE) {
                 System.out.println("You are ill!:	");
-            }
-        }catch (NumberFormatException	e) {
-            throw new IllegalArgumentException("It should be a number:	" + e.getMessage());
+                System.out.print("Your body temperature is: " + fahrenheitToCelsius(fahrenheit) + " Celsius.");
+            } else {
+            System.out.print("Your body temperature is: " + fahrenheitToCelsius(fahrenheit) + " Celsius.");
+        }
+        }catch (IllegalArgumentException	e) {
+            System.out.println(e.getMessage());
         }
     }
 }

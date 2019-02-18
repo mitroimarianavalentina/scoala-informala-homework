@@ -68,7 +68,7 @@ public class Time {
             }else {
                 System.out.print("Incorrect time!");
             }
-        }catch (NumberFormatException	e) {
+        }catch (IllegalArgumentException	e) {
             System.out.println("Invalid	arguments:	"  + e.getMessage());
         }
     }
