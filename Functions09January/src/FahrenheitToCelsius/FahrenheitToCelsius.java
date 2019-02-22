@@ -1,4 +1,9 @@
 
+package FahrenheitToCelsius;
+
+import java.util.Scanner;
+
+
 /**
  * 2. Fahrenheit to Celsius Conversion
  * - create a method that converts temperature from Fahrenheit to Celsius.
@@ -10,10 +15,6 @@
  *
  * @author Maariana Valentina Mitroi
  */
-
-package FahrenheitToCelsius;
-
-import java.util.Scanner;
 
 public class FahrenheitToCelsius {
 
@@ -31,8 +32,8 @@ public class FahrenheitToCelsius {
      * @param fahrenheit - the fahrenheit value given by the user
      * @return the value resulted after transforming the fahrenheit to celsius
      */
-    private static float fahrenheitToCelsius(int fahrenheit) {
-        return (float) (fahrenheit - 32) * 5 / 9;
+    public static float fahrenheitToCelsius(float fahrenheit) {
+        return (fahrenheit - 32) * 5 / 9;
     }
 
     /**
@@ -40,13 +41,11 @@ public class FahrenheitToCelsius {
      */
     private static void exerciseTwo() {
         System.out.print("Enter the body temperature (in Fahrenheit): ");
-        int fahrenheit = scanner.nextInt();
+        float fahrenheit = scanner.nextFloat();
         if (fahrenheitToCelsius(fahrenheit) > NORMAL_BODY_TEMPERATURE) {
             System.out.println("You are ill!");
-            System.out.print("Your body temperature is: " + fahrenheitToCelsius(fahrenheit) + " Celsius.");
-        } else {
-            System.out.print("Your body temperature is: " + fahrenheitToCelsius(fahrenheit) + " Celsius.");
         }
+        System.out.print("Your body temperature is: " + fahrenheitToCelsius(fahrenheit) + " Celsius.");
     }
 
 }
